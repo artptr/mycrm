@@ -1,4 +1,9 @@
-<div class="wrapper sidebar-mini" [ngClass]="{'sidebar-collapse': collapsed}">
+<ng-container *ngIf="routeData && routeData.exclusive; else mainTemplate">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-template #mainTemplate>
+  <div class="wrapper sidebar-mini" [ngClass]="{'sidebar-collapse': collapsed}">
     <app-header (toggleCollapse)="toggleCollapse()"></app-header>
     <app-sidebar></app-sidebar>
     <div class="content-wrapper">
@@ -10,4 +15,5 @@
       </section>
     </div>
     <app-footer></app-footer>
-</div>
+  </div>
+</ng-template>

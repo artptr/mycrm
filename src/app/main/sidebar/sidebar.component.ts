@@ -11,7 +11,7 @@ export class SidebarComponent {
   routes: AppRoutes;
 
   constructor() {
-    this.routes = ROUTES.filter(route => route.data);
+    this.routes = ROUTES.filter(route => route.data && !route.data.exclusive);
   }
 
 }

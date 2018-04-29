@@ -24,7 +24,10 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof RoutesRecognized) {
         this.routeData = event.state.root.firstChild.data as AppRouteData;
-        this.titleElement.text = `${this.routeData.title} - ${appTitle}`;
+        const { title } = this.routeData;
+        this.titleElement.text = title
+          ? `${this.routeData.title} - ${appTitle}`
+          : appTitle;
       }
     });
   }

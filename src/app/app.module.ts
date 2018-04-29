@@ -7,12 +7,14 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { CustomersModule } from './customers/customers.module';
 
 import { AppComponent } from './app.component';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     SharedModule,
     MainModule,
+    LoginModule,
     DashboardModule,
     CustomersModule
   ],
