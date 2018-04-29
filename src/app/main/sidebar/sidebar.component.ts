@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppRoutes, ROUTES } from '../../app.router';
+import { AppRoutes, ROUTES } from '../../app-routing.module';
 
 @Component({
   selector: 'app-sidebar',

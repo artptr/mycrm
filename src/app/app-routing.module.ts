@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Data, Route, RouterModule } from '@angular/router';
 
-import { DashboardComponent } from './modules/dashboard/dashboard.component';
-import { CustomersComponent } from './modules/customers/customers.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CustomersComponent } from './customers/customers.component';
 
 export interface AppRouteData extends Data {
   title: string;
@@ -22,7 +22,11 @@ export const ROUTES: AppRoutes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forRoot(ROUTES)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
-export class AppRouterModule { }
+export class AppRoutingModule { }

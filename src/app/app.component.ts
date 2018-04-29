@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
-import { AppRouteData } from './app.router';
 
-const APP_TITLE = 'MyCRM';
+import { AppRouteData } from './app-routing.module';
+
+const appTitle = 'MyCRM';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ const APP_TITLE = 'MyCRM';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
   collapsed = false;
   routeData: AppRouteData;
   titleElement: HTMLTitleElement;
@@ -21,10 +23,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.router.events.subscribe((event) => {
       if (event instanceof RoutesRecognized) {
-        const breadcrumbs = [];
-
         this.routeData = event.state.root.firstChild.data as AppRouteData;
-        this.titleElement.text = `${this.routeData.title} - ${APP_TITLE}`;
+        this.titleElement.text = `${this.routeData.title} - ${appTitle}`;
       }
     });
   }
