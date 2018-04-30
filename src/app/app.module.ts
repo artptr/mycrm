@@ -8,10 +8,12 @@ import { CustomersModule } from './customers/customers.module';
 
 import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   imports: [
     BrowserModule,
+    CoreModule,
     SharedModule,
     MainModule,
     LoginModule,

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
+import { SidebarService } from '../../core/sidebar.service';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +8,13 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class HeaderComponent {
 
+  constructor(private sidebarService: SidebarService) { }
+
   @Output() toggleCollapse = new EventEmitter();
 
   handleCollapseToggler(event: MouseEvent) {
     event.preventDefault();
-    this.toggleCollapse.emit();
+    this.sidebarService.toggleCollapse();
   }
 
 }

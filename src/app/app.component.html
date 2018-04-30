@@ -3,17 +3,5 @@
 </ng-container>
 
 <ng-template #mainTemplate>
-  <div class="wrapper sidebar-mini" [ngClass]="{'sidebar-collapse': collapsed}">
-    <app-header (toggleCollapse)="toggleCollapse()"></app-header>
-    <app-sidebar></app-sidebar>
-    <div class="content-wrapper">
-      <section class="content-header" *ngIf="routeData">
-        <h1>{{ routeData.title }}</h1>
-      </section>
-      <section class="content">
-        <router-outlet></router-outlet>
-      </section>
-    </div>
-    <app-footer></app-footer>
-  </div>
+  <app-main></app-main>
 </ng-template>

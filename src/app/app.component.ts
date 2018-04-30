@@ -12,7 +12,6 @@ const appTitle = 'MyCRM';
 })
 export class AppComponent implements OnInit {
 
-  collapsed = false;
   routeData: AppRouteData;
   titleElement: HTMLTitleElement;
 
@@ -30,10 +29,6 @@ export class AppComponent implements OnInit {
           : appTitle;
       }
     });
-  }
-
-  toggleCollapse() {
-    this.collapsed = !this.collapsed;
   }
 
 }

@@ -1,0 +1,8 @@
+<div class="content-wrapper">
+  <section class="content-header" *ngIf="routeData">
+    <h1>{{ routeData.title }}</h1>
+  </section>
+  <section class="content">
+    <router-outlet></router-outlet>
+  </section>
+</div>
