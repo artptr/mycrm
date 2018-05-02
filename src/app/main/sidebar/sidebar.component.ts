@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { AppRoutes, ROUTES } from '../../app-routing.module';
+
+import { ROUTES } from '../main-routing.module';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,10 +9,17 @@ import { AppRoutes, ROUTES } from '../../app-routing.module';
 })
 export class SidebarComponent {
 
-  routes: AppRoutes;
+  menu = [];
 
   constructor() {
-    this.routes = ROUTES.filter(route => route.data);
+    const root = ROUTES[0];
+    this.menu = ROUTES[0].children
+      .filter(route => route.data)
+      .map(route => ({
+        path: `/${root.path}/${route.path}`,
+        title: route.data.title,
+        icon: route.data.icon
+      }));
   }
 
 }

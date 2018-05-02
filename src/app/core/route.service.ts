@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Router, RoutesRecognized } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { ConnectableObservable } from 'rxjs/observable/ConnectableObservable';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/multicast';
 
 import { AppRouteData } from '../app-routing.module';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const appTitle = 'MyCRM';
 
@@ -15,27 +14,41 @@ const appTitle = 'MyCRM';
 export class RouteService {
 
   private readonly titleElement: HTMLTitleElement;
-  private readonly routeData: ConnectableObservable<AppRouteData>;
+  private readonly routeData: BehaviorSubject<AppRouteData>;
 
   constructor(private router: Router) {
     this.titleElement = document.querySelector('title');
 
-    this.routeData = this.router.events
-      .filter(event => event instanceof RoutesRecognized)
-      .map((event: RoutesRecognized) => event.state.root.firstChild.data as AppRouteData)
-      .multicast(new Subject());
+    this.routeData = new BehaviorSubject(null);
 
-    this.routeData.subscribe(({ title }: AppRouteData) => {
-      this.titleElement.text = title
-        ? `${title} - ${appTitle}`
-        : appTitle;
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const { root } = this.router.routerState.snapshot;
+        const snapshot = getCurrentRouteSnapshot(root);
+        const data = snapshot.data as AppRouteData;
+
+        this.routeData.next(data);
+
+        const { title } = data;
+        this.titleElement.text = title
+          ? `${title} - ${appTitle}`
+          : appTitle;
+      }
     });
-
-    this.routeData.connect();
   }
 
   getRouteData(): Observable<AppRouteData> {
     return this.routeData;
   }
 
+}
+
+function getCurrentRouteSnapshot(root: ActivatedRouteSnapshot): ActivatedRouteSnapshot {
+  let current = root;
+
+  while (current.firstChild) {
+    current = current.firstChild;
+  }
+
+  return current;
 }
