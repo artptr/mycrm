@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { SidebarService } from '../core/sidebar.service';
 import { Subscription } from 'rxjs/Subscription';
+
+import { SidebarService } from '../core/sidebar.service';
 
 @Component({
   selector: 'app-main',
@@ -9,8 +10,9 @@ import { Subscription } from 'rxjs/Subscription';
 })
 export class MainComponent implements OnInit, OnDestroy {
 
-  collapsingSubscription: Subscription;
   collapsed: boolean;
+
+  private collapsingSubscription: Subscription;
 
   constructor(private sidebarService: SidebarService) { }
 

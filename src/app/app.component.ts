@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RoutesRecognized } from '@angular/router';
-
-import { AppRouteData } from './app-routing.module';
-
-const appTitle = 'MyCRM';
+import { RouteService } from './core/route.service';
 
 @Component({
   selector: 'app-root',
@@ -12,23 +8,15 @@ const appTitle = 'MyCRM';
 })
 export class AppComponent implements OnInit {
 
-  routeData: AppRouteData;
-  titleElement: HTMLTitleElement;
+  exclusive: boolean;
 
-  constructor(private router: Router) {
-    this.titleElement = document.querySelector('title');
-  }
+  constructor(private routeService: RouteService) { }
 
   ngOnInit() {
-    this.router.events.subscribe((event) => {
-      if (event instanceof RoutesRecognized) {
-        this.routeData = event.state.root.firstChild.data as AppRouteData;
-        const { title } = this.routeData;
-        this.titleElement.text = title
-          ? `${this.routeData.title} - ${appTitle}`
-          : appTitle;
-      }
-    });
+    this.routeService.getRouteData()
+      .subscribe(routeData => {
+        this.exclusive = routeData && routeData.exclusive;
+      });
   }
 
 }
